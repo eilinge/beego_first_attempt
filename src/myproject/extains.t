@@ -1,4 +1,30 @@
 /*
+MVC
+Model   模板    操作数据库
+View    视图    与前端页面有关的内容
+Controller  控制器      业务有关内容
+
+项目结构以及运行的分析
+    conf
+        base config:app/mysql
+    controllers
+        default: Get/Post operate instance
+    models
+        model: table struct and login
+    routers
+        router: add router and methods
+        
+路由的设置
+    默认访问请求对应的函数, 如果设置了请求对应的方法, 默认将不再访问
+
+ORM     对象关系映射(无需提前定义数据库表的相关结构)
+O   object      对象
+R   relation    关系    关系型数据库
+M   mapping     映射
+    1.通过对象操作相对应的数据库表
+    2.通过结构体对象生成相对应的数据库表
+
+
 docker mysql
 
     runoob@runoob:~/mysql$ docker run -p 3306:3306 --name mymysql -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.6
