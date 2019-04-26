@@ -10,11 +10,14 @@
 
 <body>
     <h1>注册页面</h1>
-    <form action="/login" method="POST">
-        用户名: <input type="text" name="userName">
-        密码: <input type="password" name="pwd">
-        <input type="submit" value="Login">
+    <form class="login_form" name="login" action="/login" method="post">
+        <h1 class="login_title">用户登录</h1>
+        <input class="input_txt" type="text" name="userName">
+        <input class="input_txt" type="password" name="pwd">
+        <div class="remember"><input type="checkbox" name="remember"><label>记住用户名</label></div>
+        <input type="submit" value="Login" class="input_sub">
     </form>
+    <div class="login_bg"></div>
 </body>
 
 </html>

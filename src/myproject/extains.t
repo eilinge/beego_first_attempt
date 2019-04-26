@@ -62,4 +62,21 @@ docker mysql
     3xx     请求资源被转移, 请求被转移           302
     4xx     请求失败                            404
     5xx     服务器错误                          500
+
+Orm: 数据库字段属性设置
+主键: `pk`
+自增: `auto`
+Field类型为int, int32, int64, uint, uint64时, 可以设置字段为自增键, 当模型定义里
+没有主键时, 符合上述类型且名称为Id的field将被视为自增键
+默认值: `default(11)`
+长度: `size(100)`
+允许为空: `null`, 数据库默认是非空, 设置null之后就可以变为"ALLOW NULL"
+唯一: `unique`
+浮点精度: `digits(4);decimals(3)`["1.324"]
+时间:
+    `auto_now_add.type(datetime)`
+    `auto_now.type(date)`
+auto_now: 每次Model保存时都会对时间自动更新
+auto_now_add: 第一次保存时才设置时间
+
 */

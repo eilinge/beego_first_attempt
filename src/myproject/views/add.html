@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="main_body" id="main_body">
+        <div class="breadcrub">
+            当前位置: 文章管理>添加文章
+        </div>
+        <div class="pannel">
+            <!-- 上传图片: encytpe="multipart/form-data" -->
+            <form action="/addArticle" method="post" enctype="multipart/form-data">
+                <h3 class="review_title">添加文章</h3>
+                <div class="form_group">
+                    <label>文章标题:</label>
+                    <input type="text" class="input_txt2" name="articleName">
+                </div>
+                <div class="form_group">
+                    <label>文章类型:</label>
+                    <select name="select" class="sel_opt">
+                        <option>体育新闻</option>
+                        <option>财经新闻</option>
+                        <option>科技新闻</option>
+                    </select>
+                </div>
+                <div class="form_group">
+                    <label>文章内容:</label>
+                    <textarea class="input_multxt" name="content" id="" cols="30" rows="10"></textarea>
+                </div>
+                <div class="form_group">
+                    <label>上传图片:</label>
+                    <input type="file" class="input_file" name="uploadname">
+                </div>
+                <div class="form_group indent_group line_top">
+                    <input type="submit" value="add" class="confirm">
+                    <span>{{.errmsg}}</span>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

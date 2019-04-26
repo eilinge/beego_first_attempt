@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Theme example</title>
+    <!-- <link rel="stylesheet" href="../css/link.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+    </script>
+</head>
+
+<body>
+    <div>
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th width="43%">文章标题</th>
+                            <th width="10%">文章内容</th>
+                            <th width="16%">添加时间</th>
+                            <th width="7%">阅读量</th>
+                            <th width="7%">删除</th>
+                            <th width="7%">编辑</th>
+                            <th width="10%">文章类型</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{range .articles}}
+                        <tr>
+                            <td>{{.ArtiName}}</td>
+                            <td><a href="/content?id={{.Id}}">查看详情</a></td>
+                            <td>{{.Atime}}</td>
+                            <td>{{.Acount}}</td>
+                            <td><a href="#" class="dels">delete</a></td>
+                            <td><a href="#">edit</a></td>
+                            <td>type</td>
+                        </tr>
+                        {{end}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
