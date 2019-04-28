@@ -12,7 +12,7 @@ Controller  控制器      业务有关内容
     models
         model: table struct and login
     routers
-        router: add router and methods
+        router: add router and methods n
         
 路由的设置
     默认访问请求对应的函数, 如果设置了请求对应的方法, 默认将不再访问
@@ -79,4 +79,14 @@ Field类型为int, int32, int64, uint, uint64时, 可以设置字段为自增键
 auto_now: 每次Model保存时都会对时间自动更新
 auto_now_add: 第一次保存时才设置时间
 
+router.go
+    route: "/index", motheds: Get/Post
+default.go
+    get(): send data and display data
+        c.Data["article"] = arti
+        c.TplName = "content.html"
+    post(): store data to database/direct new html
+
+get html field value
+    GetString/GetInt/GetBool...(name="value")
 */

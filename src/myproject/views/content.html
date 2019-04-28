@@ -9,11 +9,28 @@
 <body>
     <div class="panel">
         <h3 class="review_title">文章详情</h3>
-        <div class="from_group"></div>
-        <div class="from_group"></div>
-        <div class="from_group"></div>
-        <div class="from_group"></div>
-        <div class="from_group"></div>
+        <div class="from_group">
+            <label>title</label>
+            <p><b>{{.article.ArtiName}}</b></p>
+        </div>
+        <div class="from_group">
+            <label>type</label>
+            <p><b>体育新闻</b></p>
+        </div>
+
+        <div class="from_group">
+            <label>Content</label>
+            <p><img src="{{.article.Aimg}}"><b>{{.article.Acontent}}</b></p>
+        </div>
+        <div class="from_group">
+            <label>read count</label>
+            <p><b>{{.article.Acount}}</b></p>
+        </div>
+        <div class="from_group">
+            <label>build time</label>
+            <p class="detail">{{.article.Atime}}</p>
+            <span>{{.errmsg}}</span>
+        </div>
     </div>
 </body>
 </html>

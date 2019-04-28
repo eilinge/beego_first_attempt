@@ -18,4 +18,8 @@ func init() {
 	beego.Router("/index", &controllers.MainController{}, "get:ShowIndex")
 
 	beego.Router("/content", &controllers.MainController{}, "get:ShowContent")
+
+	beego.Router("/update", &controllers.MainController{}, "get:ShowUpdate;post:HandleUpdate")
+
+	beego.Router("/delete", &controllers.MainController{}, "get:ShowDelete")
 }

@@ -20,7 +20,7 @@
 <body>
     <div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -40,13 +40,31 @@
                             <td><a href="/content?id={{.Id}}">查看详情</a></td>
                             <td>{{.Atime}}</td>
                             <td>{{.Acount}}</td>
-                            <td><a href="#" class="dels">delete</a></td>
-                            <td><a href="#">edit</a></td>
+                            <td><a href="/delete?id={{.Id}}" class="dels">delete</a></td>
+                            <td><a href="/update?id={{.Id}}">edit</a></td>
                             <td>type</td>
                         </tr>
                         {{end}}
                     </tbody>
                 </table>
+
+                <ul class="pagenation">
+                    <li><a href="/index?id=1">first</a></li>
+                    <!-- typescript -->
+                    {{ if compare .firstPage true }}
+                        <li>pre</li>
+                    {{ else }}
+                        <li><a href="/index?id={{.current | PrePage}}">pre</a></li>
+                    {{ end }}
+
+                    {{ if compare .lastPage true }}
+                        <li>next</li>
+                    {{ else }}
+                        <li><a href="/index?id={{.current | NextPage}}">next</a></li>
+                    {{ end }}
+                    <li><a href="/index?id={{.pageCount}}">last</a></li>
+                    <li>共{{.count}}条记录/共{{.pageCount}}页/当前{{.current}}页</li>
+                </ul>
             </div>
         </div>
     </div>
