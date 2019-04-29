@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="pannel">
+        <table>
+            <tr>
+                <th>id</th>
+                <th>type name</th>
+                <th>manager operation</th>
+            </tr>
+            {{ range .addTypes }}
+            <tr>
+                <td>{{ .Id }}</td>
+                <td>{{ .TypeName }}</td>
+                <td><a href="/deleteType?id={{.Id}}" class="edit">delete</a></td>
+            </tr>
+            {{ end }}
+            <tr>
+                <td colspan="3">
+                    <form action="/addType", method="post">
+                        <input type="text" class="type_txt" placeholder="add type" name="typeName">
+                        <input type="submit" class="addtype" value="add type">
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

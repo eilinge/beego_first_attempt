@@ -47,7 +47,7 @@ mysql> desc article;
 | aimg             | varchar(255) | NO   |     |         |                |
 | article_types_id | int(11)      | NO   |     | NULL    |                |
 +------------------+--------------+------+-----+---------+----------------+
-7 rows in set (0.00 sec)
+7 rows in set (0.04 sec)
 
 mysql> desc article_type;
 +-----------+-------------+------+-----+---------+----------------+
@@ -57,13 +57,33 @@ mysql> desc article_type;
 | type_name | varchar(20) | NO   |     |         |                |
 +-----------+-------------+------+-----+---------+----------------+
 2 rows in set (0.00 sec)
+
+mysql> desc user_articles;
++------------+------------+------+-----+---------+----------------+
+| Field      | Type       | Null | Key | Default | Extra          |
++------------+------------+------+-----+---------+----------------+
+| id         | bigint(20) | NO   | PRI | NULL    | auto_increment |
+| user_id    | int(11)    | NO   |     | NULL    |                |
+| article_id | int(11)    | NO   |     | NULL    |                |
++------------+------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> desc user;
++-------+--------------+------+-----+---------+----------------+
+| Field | Type         | Null | Key | Default | Extra          |
++-------+--------------+------+-----+---------+----------------+
+| id    | int(11)      | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(255) | NO   | UNI |         |                |
+| pwd   | varchar(255) | NO   |     |         |                |
++-------+--------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
 */
 func init() {
 	orm.RegisterDataBase("default", "mysql", "root:tester@tcp(127.0.0.1:3306)/test?charset=utf8")
 
 	orm.RegisterModel(new(User), new(Article), new(ArticleType))
 
-	orm.RunSyncdb("default", true, true)
+	orm.RunSyncdb("default", false, true)
 	// true: 每次运行程序时, 重新创建表
 	// orm.RunSyncdb("default", true, true)
 }

@@ -62,6 +62,10 @@ func (c *MainController) HandleLogin() {
 
 // ShowAdd get method
 func (c *MainController) ShowAdd() {
+	o := orm.NewOrm()
+	var types []models.ArticleType
+	o.QueryTable("ArticleType").All(&types)
+	c.Data["types"] = types
 	c.TplName = "add.html"
 }
 
@@ -113,6 +117,23 @@ func (c *MainController) HandleAdd() {
 	arti.Acontent = artiContent
 	arti.Aimg = "/static/img/" + h.Filename
 	logs.Info(arti)
+
+	typeName := c.GetString("select")
+	if typeName == "" {
+		logs.Info("select data error")
+		return
+	}
+
+	var artiType models.ArticleType
+	artiType.TypeName = typeName
+
+	err = o.Read(&artiType, "TypeName")
+	if err != nil {
+		logs.Info("get type error", err)
+		return
+	}
+	arti.ArticleTypes = &artiType
+
 	if _, err = o.Insert(&arti); err != nil {
 		logs.Info("insert failed", err)
 	}
@@ -169,6 +190,15 @@ func (c *MainController) ShowIndex() {
 		lastPage = true
 	}
 
+	artype := orm.NewOrm()
+	var types []models.ArticleType
+	_, err = artype.QueryTable("ArticleType").All(&types)
+	if err != nil {
+		logs.Info("check articles type failed", err)
+		return
+	}
+
+	c.Data["types"] = types
 	c.Data["pageCount"] = pageCount
 	c.Data["articles"] = articles
 	c.Data["current"] = pageIndex
@@ -177,6 +207,24 @@ func (c *MainController) ShowIndex() {
 	// 进行数据传输
 	c.TplName = "index.html"
 
+}
+
+// HandleIndex ...
+func (c *MainController) HandleIndex() {
+	typeName := c.GetString("select")
+	if typeName == "" {
+		logs.Info("select data failed")
+		return
+	}
+
+	o := orm.NewOrm()
+	var articles []models.ArticleType
+	// Filter() 过滤器: where
+	// Filter("table_field", fieldValue)
+	// Orm 多表查询是惰性删除, 需指定外键关联表: RelatedSel
+	o.QueryTable("Article").RelatedSel("ArticleType").Filter("ArticleType__TypeName", typeName).All(&articles)
+	logs.Info(articles)
+	// c.Redirect("/index", 302)
 }
 
 // ShowContent ...
@@ -306,4 +354,57 @@ func (c *MainController) ShowDelete() {
 	}
 
 	c.Redirect("/index", 302)
+}
+
+// ShowaddType ...
+func (c *MainController) ShowaddType() {
+	o := orm.NewOrm()
+	var addTypes []models.ArticleType
+	// addTypes = models.ArticleType()
+	_, err := o.QueryTable("ArticleType").All(&addTypes)
+
+	if err != nil {
+		logs.Info("read failed")
+		return
+	}
+	logs.Info("addTypes", addTypes)
+	c.Data["addTypes"] = addTypes
+	c.TplName = "addType.html"
+}
+
+// HandleaddType ...
+func (c *MainController) HandleaddType() {
+
+	typeName := c.GetString("typeName")
+	if typeName == "" {
+		logs.Info("typename is empty")
+		return
+	}
+
+	o := orm.NewOrm()
+	typena := models.ArticleType{}
+	typena.TypeName = typeName
+	_, err := o.Insert(&typena)
+	if err != nil {
+		logs.Info("insert failed", err)
+		return
+	}
+	c.Redirect("/addType", 302)
+}
+
+//ShowdeleteType ...
+func (c *MainController) ShowdeleteType() {
+	id, err := c.GetInt("id")
+	if err != nil {
+		logs.Info("get type id failed", err)
+		return
+	}
+	deletype := orm.NewOrm()
+	dp := models.ArticleType{Id: id}
+	_, err = deletype.Delete(&dp)
+	if err != nil {
+		logs.Info("delete type failed", err)
+		return
+	}
+	c.Redirect("/addType", 302)
 }
